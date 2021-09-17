@@ -10,7 +10,7 @@
 	Tcp
 	Udp
 	
-Рабоачая папка проекта (непосредсвенно с кодом)  находится в [Assets/Scripts](Assets/Scripts)    
+Рабочая папка проекта (непосредсвенно с кодом)  находится в [Assets/Scripts](Assets/Scripts)    
 
 Графика и сцены в папка [Assets/Scenes](Assets/Scenes)
 
