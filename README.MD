@@ -15,3 +15,5 @@
 Графика и сцены в папка [Assets/Scenes](Assets/Scenes)
 
 В папка [Assets/GitIntegration](Assets/GitIntegration) находится скрипт настраиющий локальный реппозиторий под Lfs технологию (хранение графики и банарных фаилов на сервере Lfs без контроля версии их изменений)
+
+Скомпилированные версии под Android находится в разделе [Releases](https://github.com/webrobot1/unity/releases)
