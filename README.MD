@@ -1,6 +1,6 @@
 ![Preview](preview.png)
 
-Игровой клиент на C# на движке [Unity](https://unity.com/ru)    
+Игровой клиент на C# на движке Unity ([офф. сайт](https://unity.com/ru))    
 
 Сделан для демонтраций возможности проекта [Онлайн Игры](https://github.com/webrobot1?tab=repositories&q=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD&type=&language=&sort=). 
 
