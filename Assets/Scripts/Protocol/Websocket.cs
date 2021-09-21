@@ -1,17 +1,17 @@
 using System;
 using System.Text;
 using UnityEngine;
-using WebSocketSharp;
+using HybridWebSocket;
 
 public class Websocket: Protocol
 {
-	private WebSocketSharp.WebSocket connect;
+	protected WebSocket connect;
 
 	protected override void Connect()
 	{
 		try
 		{
-			connect = new WebSocket("ws://95.216.204.181:8081");
+			connect = WebSocketFactory.CreateInstance("ws://95.216.204.181:8081");
 			connect.OnClose += OnClose;
 			connect.OnMessage += OnMessage;
 			connect.OnOpen += OnOpen;
@@ -24,25 +24,25 @@ public class Websocket: Protocol
 		}
 	}
 
-	private void OnOpen(object sender, EventArgs e)
+	private void OnOpen()
 	{
 		Debug.Log("Соединение с севрером установлено");
 		reconnect = 0;
 	}
 
-	private void OnError(object sender, ErrorEventArgs e)
+	private void OnError(string errMsg)
 	{
-		error = "Ошибка соединения " + e.Message;
+		error = "Ошибка соединения " + errMsg;
 	}
 
 
-	private void OnMessage(object sender, MessageEventArgs e)
+	public void OnMessage(byte[] msg)
 	{
-		recives.Add(e.Data);	
+		recives.Add(Encoding.UTF8.GetString(msg));	
 	}
 
 
-	private void OnClose(object sender, CloseEventArgs e)
+	private void OnClose(WebSocketCloseCode code)
 	{
 		/*if (reconnect < 5 && !e.WasClean)
 		{
@@ -55,7 +55,7 @@ public class Websocket: Protocol
 			}
 		}
 		else*/
-			error = "Соединение с сервером закрыто " + e.Reason;
+			error = "Соединение с сервером закрыто (" + code.ToString() + ")";
 	}
 
 
@@ -64,7 +64,7 @@ public class Websocket: Protocol
 		try
 		{
 			Debug.Log(DateTime.Now.Millisecond + " Отправили серверу " + data);
-			byte[] sendBytes = Encoding.ASCII.GetBytes(data);
+			byte[] sendBytes = Encoding.UTF8.GetBytes(data);
 			connect.Send(sendBytes);
 		}
 		catch (Exception ex)

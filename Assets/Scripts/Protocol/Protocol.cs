@@ -1,10 +1,7 @@
 using System;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.WebSockets;
-using UnityEngine;
 using System.Runtime.Remoting;
+using UnityEngine;
 
 abstract public class Protocol
 {
@@ -22,8 +19,8 @@ abstract public class Protocol
 	protected abstract void Connect();
 	public abstract void Send(string data);
 
-    public static explicit operator Protocol(ObjectHandle v)
-    {
-        throw new NotImplementedException();
-    }
+	public static explicit operator Protocol(ObjectHandle v)
+	{
+		throw new NotImplementedException();
+	}
 }

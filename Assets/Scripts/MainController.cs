@@ -76,33 +76,12 @@ public class MainController : ConnectController
     {
         if (player != null)
         {
-            // по клику мыши отправим серверу начать расчет пути к точки и двигаться к ней
-            /*bool click = Input.GetMouseButtonDown(0);
-			if (click)
-			{
-				target = camera.ScreenToWorldPoint(Input.mousePosition);
-				player.agent.CalculatePath((Vector2)target, path);
-
-				if (path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1)
-				{
-					current_path = 1;
-				}
-			}else
-			*/
-
-            // если двинули джойстиком и уже идем к точки - отправим серверу команду перестать идти к точке
-            if (((vertical = Input.GetAxis("Vertical")) != 0 || (vertical = variableJoystick.Vertical) != 0 || (horizontal = Input.GetAxis("Horizontal")) != 0 || (horizontal = variableJoystick.Horizontal) != 0)) // && path!=null
-            {
-                //current_path = 0;
-                //	path.ClearCorners();
-            }
-
             // если ответа  сервера дождались (есть пинг-скорость на движение) и дистанция  такая что уже можно слать новый запрос 
             // или давно ждем (если нас будет постоянно отбрасывать от дистанции мы встанем и сможем идти в другом направлении)
             if (CanMove())
             {
-                if (vertical != 0 || horizontal != 0)
-                {
+               if ((vertical = Input.GetAxis("Vertical")) != 0 || (vertical = variableJoystick.Vertical) != 0 || (horizontal = Input.GetAxis("Horizontal")) != 0 || (horizontal = variableJoystick.Horizontal) != 0) 
+               {
                     if (vertical > 0)
                     {
                         action = "move/up";

@@ -76,7 +76,7 @@ public abstract class ConnectController : MonoBehaviour
 				}
 				catch (Exception ex)
 				{
-					StartCoroutine(LoadRegister(ex.Message));
+					StartCoroutine(LoadRegister(ex.Message + ": " + Protocol.recives[i]));
 				}
 				Protocol.recives.RemoveAt(i);
 			}
@@ -203,13 +203,13 @@ public abstract class ConnectController : MonoBehaviour
 		form.AddField("token", this.token);
 		form.AddBinaryData("screen", bytes);
 
+		UnityWebRequest request = UnityWebRequest.Post("http://95.216.204.181:8080/game/signin/screen", form);
 
-		var w = UnityWebRequest.Post("http://95.216.204.181:8080/game/signin/screen", form);
-		yield return w.SendWebRequest();
+		yield return request.SendWebRequest();
 
-		if (w.result != UnityWebRequest.Result.Success)
+		if (request.result != UnityWebRequest.Result.Success)
 		{
-			Debug.Log(w.error);
+			Debug.Log(request.error);
 		}
 		else
 		{

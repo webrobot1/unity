@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyModel : ObjectModel
 {
@@ -12,7 +10,6 @@ public class EnemyModel : ObjectModel
 
 	// когда был последний пинг
 	private DateTime _pingLast = DateTime.Now;
-	public NavMeshAgent agent;
 
 	/// <summary>
 	/// если не null - движемся
@@ -28,11 +25,6 @@ public class EnemyModel : ObjectModel
 	new void Start()
 	{
 		base.Start();
-
-		// агент нам заменяет RigidBody по сути сейчас и не дает ходить по неходячим локациям - удалить потом
-		agent = GetComponent<NavMeshAgent>();
-		agent.updateRotation = false;
-		agent.updateUpAxis = false;
 	}
 
 	// Update is called once per frame
