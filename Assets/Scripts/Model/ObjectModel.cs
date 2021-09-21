@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObjectModel : MonoBehaviour
@@ -7,18 +9,28 @@ public class ObjectModel : MonoBehaviour
 	public string action = "idle";
 
 	protected Animator anim;
+	private static Dictionary<string, bool> trigers;
 
 	protected void Start()
 	{
 		anim = GetComponent<Animator>();
+
+		// сохраним все возможные Тригеры анимаций и, если нам пришел action как тигер - обновим анимацию
+		if (trigers == null)
+		{
+			trigers = new Dictionary<string, bool>();
+			foreach (var parameter in anim.parameters.Where(parameter => parameter.type == AnimatorControllerParameterType.Trigger))
+			{
+				trigers.Add(parameter.name, true);
+			}
+		}
 	}
 
 	public void SetData(ObjectJson data)
 	{
-		if (data.action.Length > 0 && this.action != data.action)
+		if (data.action.Length > 0 && this.action != data.action && trigers.ContainsKey(data.action))
 		{
 			Debug.Log("Обновляем анимацию " + data.action);
-
 			this.action = data.action;
 			anim.SetTrigger(action);
 		}

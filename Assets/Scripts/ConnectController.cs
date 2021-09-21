@@ -32,7 +32,6 @@ public abstract class ConnectController : MonoBehaviour
 	/// <summary>
 	/// Токен , требуется при первом конекте для Tcp и Ws, и постоянно при Udp
 	/// </summary>
-	[SerializeField]
 	private string token;
 
 	/// <summary>
