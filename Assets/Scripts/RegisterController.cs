@@ -16,15 +16,14 @@ public class RegisterController : MonoBehaviour
     {
         if (instance == null)
         {
-            instance = this;
+           instance = this;
         }
         else if (instance != null)
         {
             Debug.LogError("Instance already exists, destroying object!");
             Destroy(this);
         }
-    } 
- 
+    }
     public void Register()
     {
         StartCoroutine(SendRequest("register"));
@@ -52,29 +51,33 @@ public class RegisterController : MonoBehaviour
         yield return request.SendWebRequest();
 
         // проверим что пришло в ответ
-        // ....
-
         string recive = request.downloadHandler.text;
-        if (recive !=null)
-         {
+        if (recive.Length>0)
+        {
             try {
+                Debug.Log("Ответ авторизации: "+recive);
                 SiginJson response = JsonUtility.FromJson<SiginJson>(recive);
                 StartCoroutine(LoadMain(response));
             }
             catch
             {
-                Error(recive);
+                Error("Ошибка ответа авторизации:" + recive);
             }  
-        }  
+        } 
+        else 
+            Error("Пустой ответ авторизации "+ request.error);
     }
 
     public void Error(string error)
     {
+        Debug.LogError(error);
         GameObject.Find("error").GetComponent<Text>().text = error;
     }
 
     private IEnumerator LoadMain(SiginJson data)
     {
+        Debug.Log("Загрузка главной сцены");
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MainScene", new LoadSceneParameters(LoadSceneMode.Additive));
         // asyncLoad.allowSceneActivation = false;
 

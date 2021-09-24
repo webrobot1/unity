@@ -21,12 +21,10 @@ public class MainController : ConnectController
     /// </summary>
     private double horizontal;
 
-
     /// <summary>
     /// нажата кнопка двигаться по вертикали
     /// </summary>
     private double vertical;
-
 
     // поиск пути                     	
     //private NavMeshPath path;						

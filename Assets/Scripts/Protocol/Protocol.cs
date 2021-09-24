@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting;
 using UnityEngine;
 
 abstract public class Protocol
@@ -18,9 +17,4 @@ abstract public class Protocol
 
 	protected abstract void Connect();
 	public abstract void Send(string data);
-
-	public static explicit operator Protocol(ObjectHandle v)
-	{
-		throw new NotImplementedException();
-	}
 }
