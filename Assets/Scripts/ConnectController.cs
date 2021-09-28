@@ -107,6 +107,11 @@ public abstract class ConnectController : MonoBehaviour
 		if (recive.action == "screen")
 		{
 			StartCoroutine(Screen());
+		}		
+		else if (recive.error != null)
+		{
+			// todo можно не сбраывать соединение а просто выводить что ошибка
+			StartCoroutine(LoadRegister("Ошибка:" + recive.error));
 		}
 		else
 		{

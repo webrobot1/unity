@@ -7,4 +7,5 @@ public class ReciveJson
     public MapJson map;
 
     public string action;
+    public string error;
 }
