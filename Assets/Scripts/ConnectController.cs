@@ -111,7 +111,7 @@ public abstract class ConnectController : MonoBehaviour
 		else if (recive.error != null)
 		{
 			// todo можно не сбраывать соединение а просто выводить что ошибка
-			StartCoroutine(LoadRegister("Ошибка:" + recive.error));
+			StartCoroutine(LoadRegister("Ошибка сервера:" + recive.error));
 		}
 		else
 		{
